@@ -38,11 +38,29 @@ char *token_terminator(char *token) {
 // Returns the number of tokes (words) in the string inputted
 int count_tokens(char *str) {
   int count = 0;
-  char *token = token_start(str);
+  char *token = token_start(str); //First word
 
-  while (token != NULL) {
+  while (token != '\0') { // Loop until end of initial input
     count++;
-    token = token_start(token_terminator(token));
+    token = token_start(token_terminator(token)); // .Move token ptr to start of next token
   }
   return count;
+}
+
+// Returns pointer to a resh new string of original length
+char *copy_str(char *inStr, short len) {
+  
+  char *newStr =malloc((len + 1) * sizeof(char)); // +1 for null terminator
+
+  if (newStr == NULL) {
+    return NULL;  // memory fail
+  }
+
+  for (int i = 0; i < len; i++) {
+    newStr[i] = inStr[i];  // copying the string
+  }
+  
+  newStr[len] = '\0';  // null-terminator at the end
+
+  return newStr;
 }
