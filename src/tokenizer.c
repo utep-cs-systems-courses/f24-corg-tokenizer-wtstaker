@@ -47,21 +47,61 @@ int count_tokens(char *str) {
   return count;
 }
 
-// Returns pointer to a resh new string of original length
+// Returns pointer to a new string of original length
 char *copy_str(char *inStr, short len) {
   
   char *newStr =malloc((len + 1) * sizeof(char)); // +1 for null terminator
 
-  if (newStr == NULL) {
-    return NULL;  // memory fail
-  }
+  // if (newStr == NULL) {
+  //  return NULL;  // memory fail
+  // }
 
   for (int i = 0; i < len; i++) {
     newStr[i] = inStr[i];  // copying the string
   }
   
-  newStr[len] = '\0';  // null-terminator at the end
+  newStr[len] = '\0';  // null terminator
 
   return newStr;
 }
+char **tokenize(char *str) {
+  int tokenCount = count_tokens(str);
+  char **tokens = (char **)malloc((tokenCount + 1) * sizeof(char *)); // memory allocation for tokens + null terminator
+  
+  //if (tokens == NULL) {
+  //    return NULL;
+  //}
+  
+  int i = 0;
+  char *token = token_start(str); //Find first token
 
+  // Loop until end of string
+  while (token != NULL) {
+
+    char *term = token_terminator(token); //Find end of token
+    int len = term - token; //Length of token
+    tokens[i] = copy_str(token, len);  // Copy each token
+
+    i++;  // Move to next token
+    token = token_start(term);  // Find next token
+  }
+  
+  tokens[i] = NULL;
+  return tokens;
+}
+
+// Prints all tokens
+void print_tokens(char **tokens) {
+  for (int i = 0; tokens[i] != NULL; i++) {
+    printf("Token[%d]: %s\n", i, tokens[i]);
+  }
+}
+
+// Frees all tokens
+void free_tokens(char **tokens) {
+
+  for (int i = 0; tokens[i] != NULL; i++) {
+    free(tokens[i]);
+  }
+  free(tokens);
+}
