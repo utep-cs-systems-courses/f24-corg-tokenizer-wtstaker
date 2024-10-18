@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "history.h"
+#include "tokenizer.h"
 
 // Initialize the linked list
 List* init_history() {
@@ -14,22 +15,26 @@ void add_history(List *list, char *str) {
   int pos = 1;
   Item *tmp = list->root;
 
-  //Traverse to end of list to find the position and insert new item
+  // Traverse to the end of the list to find the position and insert a new item
   if (tmp != NULL) {
     while (tmp->next != NULL) {
       tmp = tmp->next;
       pos++;
     }
-    tmp->next = malloc(sizeof(Item));  //allocate new item at the end
+    tmp->next = malloc(sizeof(Item));  // Allocate memory for a new item at the end
     tmp = tmp->next;
   } else {
-    //if the list is empty, allocate the first item
+    // If the list is empty, allocate memory for the first item
     tmp = malloc(sizeof(Item));
     list->root = tmp;
   }
-
   tmp->id = pos;
-  tmp->str = str;  // Store passed string
+  // Use the copy_str function to store a copy of the passed string
+  int len = 0;
+  while (str[len] != '\0') {
+    len++;  //  length of the string
+  }
+  tmp->str = copy_str(str, len);  // Use the existing copy_str function from tokenizer.c
   tmp->next = NULL;
 }
 
