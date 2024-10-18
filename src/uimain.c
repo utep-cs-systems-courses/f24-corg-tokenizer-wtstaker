@@ -64,7 +64,7 @@ int main() {
                 }
                       
                 else {
-                    printf("No history entry found for ID %d.\n", history_id);
+                    printf("No history entry found for ID %d.\n", id);
                 	break;}
                 tokens= tokenize(token); // tokenize the item
                 printf("\nHistory:\n");
