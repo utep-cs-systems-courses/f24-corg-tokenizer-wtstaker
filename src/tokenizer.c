@@ -38,11 +38,17 @@ char *token_terminator(char *token) {
 // Returns the number of tokes (words) in the string inputted
 int count_tokens(char *str) {
   int count = 0;
-  char *token = token_start(str); //First word
-
-  while (token != '\0') { // Loop until end of initial input
-    count++;
-    token = token_start(token_terminator(token)); // .Move token ptr to start of next token
+  char *token = str;
+  // first token
+  token =  token_start(token);
+  while(*token) {
+    //add counter if letter
+    if(non_space_char(*token)) {
+      count++;
+    }
+    // find the next token
+    token = token_terminator(token);
+    token = token_start(token);
   }
   return count;
 }
