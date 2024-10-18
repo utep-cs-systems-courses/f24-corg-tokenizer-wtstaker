@@ -68,7 +68,9 @@ int main() {
 
             case 'h':
                 // View history
-                printf("History:\n");
+	        printf("\n");
+                printf("History:");
+		printf("\n");
                 print_history(history);
                 break;
 
