@@ -55,6 +55,7 @@ int main() {
                     input[newline_pos] = '\0'; 
 
                     tokens = tokenize(input);
+                    printf("\n");
                     print_tokens(tokens);
                     add_history(history, input);
                     free_tokens(tokens);
