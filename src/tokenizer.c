@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tokenizer.h"
-
+#include "history.h"
 
 // Returns true if c is a space or \t
 int space_char(char c) {
