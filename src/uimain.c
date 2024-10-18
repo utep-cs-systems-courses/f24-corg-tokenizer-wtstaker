@@ -5,16 +5,7 @@
 
 #define MAX_INPUT_SIZE 1024
 
-int find_newline(char *str) {
-    int i = 0;
-    while (str[i] != '\0') {
-        if (str[i] == '\n') {
-            return i;
-        }
-        i++;
-    }
-    return i;  
-}
+
 
 // Display menu options to the user
 void display_menu() {
@@ -31,6 +22,7 @@ int main() {
     char input[MAX_INPUT_SIZE];
     List *history = init_history();
     char **tokens;
+    char *token;
     char choice;
 
     printf("Simple Tokenizer with History.\n");
@@ -49,17 +41,11 @@ int main() {
             case 't':
                 // tokenize
                 printf("Enter a string to tokenize: ");
-                if (fgets(input, MAX_INPUT_SIZE, stdin) != NULL) {
-                    int newline_pos = find_newline(input);
-                    input[newline_pos] = '\0'; 
-
+                    scanf(" %[^\n]", &input);
                     tokens = tokenize(input);
                     print_tokens(tokens);
                     add_history(history, input);
                     free_tokens(tokens);
-                } else {
-                    printf("Error reading input.\n");
-                }
                 break;
 
             case 'h':
@@ -71,25 +57,18 @@ int main() {
             case 'i':
                 // Lookup by history ID
                 printf("Enter history ID to recall: ");
-                if (fgets(input, MAX_INPUT_SIZE, stdin) != NULL) {
-                    int newline_pos = find_newline(input);
-                    input[newline_pos] = '\0'; 
-
-                    // Convert str to int
-                    int history_id = strtol(input, NULL, 10);
-                    char *history_entry = get_history(history, history_id);
-
-                    if (history_entry != NULL) {
-                        printf("history: %s\n", history_entry);
-                        tokens = tokenize(history_entry);
-                        print_tokens(tokens);
-                        free_tokens(tokens);
-                    } else {
-                        printf("No history entry found for ID %d.\n", history_id);
-                    }
-                } else {
-                    printf("Error reading input.\n");
+                scanf("%d", &id);
+                if (get_history(history, id) != NULL) {
+                	token = get_history(history, id);
                 }
+                      
+                else {
+                    printf("No history entry found for ID %d.\n", history_id);
+                	break;}
+                tokens= tokenize(token); // tokenize the item
+                printf("\nHistory:\n");
+                print_tokens(tokens);
+                 
                 break;
             case 'q':
                 // Quit the program
