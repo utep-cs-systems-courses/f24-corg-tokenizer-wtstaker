@@ -18,14 +18,15 @@ int non_space_char(char c) {
 
 // Returns pointer to first char in the line
 char *token_start(char *str) {
-  if(*str=='\0') // Return zero pointer if no more tokens
-    return 0;
-  
-  while (*str != '\0'){     // && space_char(*str)) {
+  while (*str != '\0' && space_char(*str)) {
     str++;
+  }
+  if (*str == '\0') {
+    return NULL; // Return NULL if no more tokens
   }
   return str;
 }
+
 
 // Returns pointer to the terminator char ater the token
 char *token_terminator(char *token) {
@@ -40,7 +41,7 @@ int count_tokens(char *str) {
   int count = 0;
   char *token = token_start(str); //First word
 
-  while (token != '\0') { // Loop until end of initial input
+  while (token != NULL) { // Loop until end of initial input
     count++;
     token = token_start(token_terminator(token)); // .Move token ptr to start of next token
   }
