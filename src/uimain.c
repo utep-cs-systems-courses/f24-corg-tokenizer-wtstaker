@@ -52,9 +52,10 @@ int main() {
                 // tokenize
                 printf("Enter a string to tokenize: ");
                 if (fgets(input, MAX_INPUT_SIZE, stdin) != NULL) {
+                    //adding null terminator
                     int newline_pos = find_newline(input);
                     input[newline_pos] = '\0'; 
-
+                    // tokenize the string input
                     tokens = tokenize(input);
                     printf("\n");
                     print_tokens(tokens);
@@ -75,6 +76,7 @@ int main() {
                 // Lookup by history ID
                 printf("Enter history ID to recall: ");
                 if (fgets(input, MAX_INPUT_SIZE, stdin) != NULL) {
+                    //adding null terminator
                     int newline_pos = find_newline(input);
                     input[newline_pos] = '\0'; 
 
