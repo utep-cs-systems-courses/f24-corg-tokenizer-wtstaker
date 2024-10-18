@@ -24,6 +24,7 @@ int main() {
     char **tokens;
     char *token;
     char choice;
+    int id;
 
     printf("Simple Tokenizer with History.\n");
 
