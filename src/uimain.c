@@ -23,7 +23,7 @@ void display_menu() {
     printf("h: View history\n");
     printf("i: Lookup by history ID\n");
     printf("q: Quit\n");
-    printf("Select an option: ");
+    printf("Select an option: \n");
 }
 
 // user interface
@@ -33,10 +33,11 @@ int main() {
     char **tokens;
     char choice;
 
-    printf("Simple Tokenizer with History.\n");
+    printf("\nSimple Tokenizer with History.\n");
 
     while (1) {
         display_menu();
+        printf("$ ");
         // Get user input for the menu option
         if (fgets(input, sizeof(input), stdin) == NULL) {
             printf("Error reading input.\n");
