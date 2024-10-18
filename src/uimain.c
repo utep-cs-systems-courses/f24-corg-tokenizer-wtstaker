@@ -22,7 +22,8 @@ void display_menu() {
     printf("t: Input a string to tokenize\n");
     printf("h: View history\n");
     printf("i: Lookup by history ID\n");
-    printf("q: Quit\n");
+    printf("q: Quit");
+    printf("\n");
     printf("Select an option: \n");
 }
 
@@ -33,7 +34,7 @@ int main() {
     char **tokens;
     char choice;
 
-    printf("\nSimple Tokenizer with History.\n");
+    printf("\n-----Simple Tokenizer with History-----\n");
 
     while (1) {
         display_menu();
